@@ -1,6 +1,6 @@
 # ForeverPFP Frontend
 
-Website for Foreveer PFP
+Website for Forever PFP
 
 ## Get started
 
