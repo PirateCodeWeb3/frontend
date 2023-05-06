@@ -27,7 +27,7 @@ export const Bind: React.FC<BindProps> = ({ selectedNft }) => {
   } = useBind(selectedNft?.contract, selectedNft?.tokenId);
 
   return (
-    <div className="">
+    <div className="space-y-4">
       <Button
         className="w-full"
         disabled={selectedNft === null}

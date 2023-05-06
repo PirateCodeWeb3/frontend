@@ -3,28 +3,27 @@ import * as React from "react";
 import { VariantProps, cva } from "class-variance-authority";
 
 import { Loader2 } from "lucide-react";
+import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-theme-400 focus:ring-offset-2 dark:hover:bg-theme-800 dark:hover:text-theme-100 disabled:opacity-50 dark:focus:ring-theme-400 disabled:pointer-events-none dark:focus:ring-offset-theme-900 data-[state=open]:bg-theme-100 dark:data-[state=open]:bg-theme-800",
+  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background",
   {
     variants: {
       variant: {
-        default:
-          "bg-theme-900 text-white hover:bg-theme-700 dark:bg-theme-50 dark:text-theme-900",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive:
-          "bg-red-500 text-white hover:bg-red-600 dark:hover:bg-red-600",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
-          "bg-transparent border border-theme-200 hover:bg-theme-100 dark:border-theme-700 dark:text-theme-100",
-        subtle:
-          "bg-theme-100 text-theme-900 hover:bg-theme-200 dark:bg-theme-700 dark:text-theme-100",
-        ghost:
-          "bg-transparent hover:bg-theme-100 dark:hover:bg-theme-800 dark:text-theme-100 dark:hover:text-theme-100 data-[state=open]:bg-transparent dark:data-[state=open]:bg-transparent",
-        link: "bg-transparent dark:bg-transparent underline-offset-4 hover:underline text-theme-900 dark:text-theme-100 hover:bg-transparent dark:hover:bg-transparent",
+          "border border-input hover:bg-accent hover:text-accent-foreground",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "underline-offset-4 hover:underline text-primary",
       },
       size: {
         default: "h-10 py-2 px-4",
-        sm: "h-9 px-2 rounded-md",
+        sm: "h-9 px-3 rounded-md",
         lg: "h-11 px-8 rounded-md",
       },
     },
@@ -38,21 +37,31 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
   loading?: boolean;
   loaderClassName?: string;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { className, variant, size, children, loading, loaderClassName, ...props },
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      children,
+      loading,
+      loaderClassName,
+      ...props
+    },
     ref
   ) => {
+    const Comp = asChild ? Slot : "button";
     return (
-      <button
+      <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-        disabled={props.disabled || loading}
       >
         {loading && (
           <Loader2
@@ -60,7 +69,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           />
         )}
         {children}
-      </button>
+      </Comp>
     );
   }
 );

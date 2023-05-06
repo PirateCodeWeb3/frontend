@@ -8,7 +8,7 @@ interface ErrorProps {
 
 export const Error: React.FC<ErrorProps> = ({ children }) => (
   <div className="overflow-x-auto rounded-md bg-red-50 p-4">
-    <div className="flex">
+    <div className="flex items-center">
       <div className="shrink-0">
         <XCircleIcon className="h-5 w-5 text-red-400" aria-hidden="true" />
       </div>

@@ -1,5 +1,11 @@
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Card, CardTitle } from "../ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 
 import React from "react";
 import { Text } from "../ui/text";
@@ -20,27 +26,33 @@ export const Profile: React.FC = () => {
   return (
     <>
       <Card>
-        <CardTitle className="mb-8 text-center">Your profile</CardTitle>
-        <Avatar className="mx-auto h-40 w-40">
-          <AvatarImage src={metadata?.media[0].thumbnail} />
-          <AvatarFallback>
-            <User className="h-8 w-8" />
-          </AvatarFallback>
-        </Avatar>
-        <Text variant={"large"} className="my-6 text-center tracking-tight">
-          {ensName ?? formattedAdr}
-        </Text>
-        {pfpBinded ? (
-          <Unbind />
-        ) : (
-          // <h2 className="text-center py-2 text-red-500 text-md leading-6">
+        <CardHeader className="text-center">
+          <CardTitle>Your profile</CardTitle>
+          <CardDescription>{ensName ?? formattedAdr}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Avatar className="mx-auto h-40 w-40">
+            <AvatarImage src={metadata?.media[0].thumbnail} />
+            <AvatarFallback>
+              <User className="h-8 w-8" />
+            </AvatarFallback>
+          </Avatar>
           <Text
             variant={"large"}
-            className="my-6 text-center tracking-tight text-red-500"
-          >
-            {locales.noPfpBinded}
-          </Text>
-        )}
+            className="my-6 text-center tracking-tight"
+          ></Text>
+          {pfpBinded ? (
+            <Unbind />
+          ) : (
+            // <h2 className="text-center py-2 text-red-500 text-md leading-6">
+            <Text
+              variant={"large"}
+              className="my-6 text-center tracking-tight text-red-500"
+            >
+              {locales.noPfpBinded}
+            </Text>
+          )}
+        </CardContent>
       </Card>
     </>
   );
