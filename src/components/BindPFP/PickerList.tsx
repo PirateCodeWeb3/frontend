@@ -52,7 +52,7 @@ export const PickerList: React.FC<PickerListProps> = ({
               className={cn(
                 selected?.contract === nft.contract.address &&
                   selected?.tokenId === +nft.tokenId &&
-                  "shadow-lg ring-2 ring-theme-500 "
+                  "ring-primary-500 shadow-lg ring-2 "
               )}
             >
               <AvatarImage

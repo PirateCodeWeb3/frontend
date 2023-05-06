@@ -1,4 +1,10 @@
-import { Card, CardDescription, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 import { BindPFP } from "@/components/BindPFP";
 import ConnectWallet from "@/components/ConnectWallet/ConnectWallet";
@@ -25,9 +31,13 @@ function App() {
       >
         {!isConnected ? (
           <Card>
-            <CardTitle>{locales.bindYourPfp}</CardTitle>
-            <CardDescription>{locales.bindWalletInstruction}</CardDescription>
-            <ConnectWallet />
+            <CardHeader>
+              <CardTitle>{locales.bindYourPfp}</CardTitle>
+              <CardDescription>{locales.bindWalletInstruction}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ConnectWallet />
+            </CardContent>
           </Card>
         ) : null}
         <div className="order-2">

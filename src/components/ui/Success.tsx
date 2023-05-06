@@ -8,7 +8,7 @@ interface SuccessProps {
 
 export const Success: React.FC<SuccessProps> = ({ children }) => (
   <div className="overflow-x-auto rounded-md bg-green-50 p-4">
-    <div className="flex">
+    <div className="flex items-center">
       <div className="shrink-0">
         <CheckCircle2Icon
           className="h-5 w-5 text-green-400"

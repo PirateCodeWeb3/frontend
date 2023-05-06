@@ -8,7 +8,7 @@ interface InfosProps {
 
 export const Infos: React.FC<InfosProps> = ({ children }) => (
   <div className="overflow-x-auto rounded-md bg-blue-50 p-4">
-    <div className="flex">
+    <div className="flex items-center">
       <div className="shrink-0">
         <AlertCircleIcon className="h-5 w-5 text-blue-400" aria-hidden="true" />
       </div>

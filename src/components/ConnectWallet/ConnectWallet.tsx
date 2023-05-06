@@ -46,11 +46,7 @@ const ConnectWallet = (): React.ReactElement | null => {
     );
   }
 
-  return (
-    <Button variant={"subtle"} onClick={openConnectModal}>
-      {locales.connectWallet}
-    </Button>
-  );
+  return <Button onClick={openConnectModal}>{locales.connectWallet}</Button>;
 };
 
 export default ConnectWallet;
