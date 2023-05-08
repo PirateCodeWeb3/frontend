@@ -24,31 +24,6 @@
       {
         "indexed": true,
         "internalType": "address",
-        "name": "to",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "contract_",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      }
-    ],
-    "name": "PFPBound",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
         "name": "from",
         "type": "address"
       },
@@ -71,7 +46,7 @@
         "type": "uint256"
       }
     ],
-    "name": "PFPBoundDelegate",
+    "name": "PrimaryDelegateSet",
     "type": "event"
   },
   {
@@ -96,7 +71,7 @@
         "type": "uint256"
       }
     ],
-    "name": "PFPUnbound",
+    "name": "PrimaryRemoved",
     "type": "event"
   },
   {
@@ -105,63 +80,29 @@
       {
         "indexed": true,
         "internalType": "address",
-        "name": "contract_",
+        "name": "to",
         "type": "address"
-      }
-    ],
-    "name": "VerificationAdded",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
+      },
       {
         "indexed": true,
         "internalType": "address",
         "name": "contract_",
         "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
       }
     ],
-    "name": "VerificationRemoved",
+    "name": "PrimarySet",
     "type": "event"
   },
   {
-    "inputs": [
-      { "internalType": "address", "name": "contract_", "type": "address" }
-    ],
-    "name": "addVerification",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "contract_", "type": "address" },
-      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
-    ],
-    "name": "bind",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "contract_", "type": "address" },
-      { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-      { "internalType": "address", "name": "delegate", "type": "address" }
-    ],
-    "name": "bindDelegate",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "contract_", "type": "address" },
-      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
-    ],
-    "name": "getBindingAddress",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "inputs": [],
+    "name": "BINDING_FEE",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -169,7 +110,7 @@
     "inputs": [
       { "internalType": "address", "name": "addr", "type": "address" }
     ],
-    "name": "getPFP",
+    "name": "getPrimary",
     "outputs": [
       { "internalType": "address", "name": "", "type": "address" },
       { "internalType": "uint256", "name": "", "type": "uint256" }
@@ -179,10 +120,11 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "contract_", "type": "address" }
+      { "internalType": "address", "name": "contract_", "type": "address" },
+      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
     ],
-    "name": "isVerified",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "name": "getPrimaryAddress",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -195,9 +137,10 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "contract_", "type": "address" }
+      { "internalType": "address", "name": "contract_", "type": "address" },
+      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
     ],
-    "name": "removeVerification",
+    "name": "removePrimary",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -211,6 +154,27 @@
   },
   {
     "inputs": [
+      { "internalType": "address", "name": "contract_", "type": "address" },
+      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+    ],
+    "name": "setPrimary",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "contract_", "type": "address" },
+      { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
+      { "internalType": "address", "name": "delegate", "type": "address" }
+    ],
+    "name": "setPrimaryForDelegate",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
       { "internalType": "address", "name": "newOwner", "type": "address" }
     ],
     "name": "transferOwnership",
@@ -219,11 +183,8 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "address", "name": "contract_", "type": "address" },
-      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
-    ],
-    "name": "unbind",
+    "inputs": [],
+    "name": "withdraw",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

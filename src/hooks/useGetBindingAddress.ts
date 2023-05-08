@@ -1,13 +1,13 @@
 import { useContractRead, useNetwork } from "wagmi";
 
-import FOREVER_PFP_ABI from "@/abi/forever-pfp-abi.json";
+import PRIMARY_PFP_ABI from "@/abi/primary-pfp-abi.json";
 import { env } from "@/config";
 
-export const useGetBindingAddress = (nftContract: string, tokenId: number) => {
+export const useGetPrimaryAddress = (nftContract: string, tokenId: number) => {
   const { data, isLoading, error } = useContractRead({
-    abi: FOREVER_PFP_ABI,
-    address: env.FOREVER_PFP_CONTRACT,
-    functionName: "getBindingAddress",
+    abi: PRIMARY_PFP_ABI,
+    address: env.PRIMARY_PFP_CONTRACT,
+    functionName: "getPrimaryAddress",
     args: [nftContract, tokenId],
   });
 

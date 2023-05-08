@@ -7,6 +7,8 @@ export const ExploreLink: React.FC<{ href: string }> = ({
   <a
     href={href}
     className="mt-2 flex items-baseline underline-offset-4 hover:underline "
+    target="_blank"
+    rel="noreferrer"
   >
     <ExternalLink className="mr-1 h-3 w-3" /> {locales.seeOnExplorer}
   </a>

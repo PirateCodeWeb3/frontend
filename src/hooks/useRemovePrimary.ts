@@ -5,20 +5,20 @@ import {
   useWaitForTransaction,
 } from "wagmi";
 
-import FOREVER_PFP_ABI from "@/abi/forever-pfp-abi.json";
-import { useGetPFP } from "./useGetPFP";
+import PRIMARY_PFP_ABI from "@/abi/primary-pfp-abi.json";
+import { useGetPrimary } from "./useGetPrimary";
 
-export const useUnbind = () => {
-  const { refetch, contractAddress, tokenId } = useGetPFP();
+export const useRemovePrimary = () => {
+  const { refetch, contractAddress, tokenId } = useGetPrimary();
 
   const {
     config,
     isError: isPrepareError,
     error: prepareError,
   } = usePrepareContractWrite({
-    address: env.FOREVER_PFP_CONTRACT,
-    abi: FOREVER_PFP_ABI,
-    functionName: "unbind",
+    address: env.PRIMARY_PFP_CONTRACT,
+    abi: PRIMARY_PFP_ABI,
+    functionName: "removePrimary",
     args: [contractAddress, tokenId],
     enabled: !!contractAddress && !!tokenId,
   });

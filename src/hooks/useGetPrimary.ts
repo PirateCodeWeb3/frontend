@@ -1,17 +1,17 @@
 import { useContractRead, useNetwork } from "wagmi";
 
 import { BigNumber } from "ethers";
-import FOREVER_PFP_ABI from "@/abi/forever-pfp-abi.json";
+import PRIMARY_PFP_ABI from "@/abi/primary-pfp-abi.json";
 import { env } from "@/config";
 import { useUser } from "./useUser";
 
-export const useGetPFP = () => {
+export const useGetPrimary = () => {
   const { address } = useUser();
 
   const { data, isLoading, error, refetch } = useContractRead({
-    abi: FOREVER_PFP_ABI,
-    address: env.FOREVER_PFP_CONTRACT,
-    functionName: "getPFP",
+    abi: PRIMARY_PFP_ABI,
+    address: env.PRIMARY_PFP_CONTRACT,
+    functionName: "getPrimary",
     args: [address],
   });
 

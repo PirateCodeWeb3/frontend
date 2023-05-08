@@ -7,7 +7,7 @@ import React from "react";
 import { ScrollArea } from "../ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { locales } from "@/locales";
-import { useGetPFP } from "@/hooks/useGetPFP";
+import { useGetPrimary } from "@/hooks/useGetPrimary";
 
 interface PickerListProps {
   nfts: OwnedNft[];
@@ -20,7 +20,7 @@ export const PickerList: React.FC<PickerListProps> = ({
   onSelect,
   selected,
 }) => {
-  const { contractAddress, tokenId } = useGetPFP();
+  const { contractAddress, tokenId } = useGetPrimary();
 
   if (nfts.length === 0)
     return (
@@ -52,7 +52,7 @@ export const PickerList: React.FC<PickerListProps> = ({
               className={cn(
                 selected?.contract === nft.contract.address &&
                   selected?.tokenId === +nft.tokenId &&
-                  "ring-primary-500 shadow-lg ring-2 "
+                  "shadow-lg ring-2 ring-primary "
               )}
             >
               <AvatarImage
