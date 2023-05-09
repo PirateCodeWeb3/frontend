@@ -4,26 +4,30 @@ import {
   useWaitForTransaction,
 } from "wagmi";
 
-import FOREVER_PFP_ABI from "@/abi/forever-pfp-abi.json";
+import PRIMARY_PFP_ABI from "@/abi/primary-pfp-abi.json";
 import { env } from "@/config";
-import { useGetPFP } from "./useGetPFP";
+import { ethers } from "ethers";
+import { useGetPrimary } from "./useGetPrimary";
 
-export const useBind = (
+export const useSetPrimary = (
   nftContract: string | undefined,
   tokenId: number | undefined
 ) => {
-  const { refetch } = useGetPFP();
+  const { refetch } = useGetPrimary();
 
   const {
     config,
     isError: isPrepareError,
     error: prepareError,
   } = usePrepareContractWrite({
-    address: env.FOREVER_PFP_CONTRACT,
-    abi: FOREVER_PFP_ABI,
-    functionName: "bind",
+    address: env.PRIMARY_PFP_CONTRACT,
+    abi: PRIMARY_PFP_ABI,
+    functionName: "setPrimary",
     args: [nftContract, tokenId],
     enabled: !!nftContract && !!tokenId,
+    overrides: {
+      value: ethers.utils.parseEther("0.01"),
+    },
   });
   const { data, isLoading, write, error, isError } = useContractWrite(config);
 

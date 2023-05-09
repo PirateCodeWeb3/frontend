@@ -6,7 +6,7 @@ import { NftData } from "./BindPFP";
 import React from "react";
 import { Success } from "../ui/Success";
 import { locales } from "@/locales";
-import { useBind } from "@/hooks/useBind";
+import { useSetPrimary } from "@/hooks/useSetPrimary";
 
 interface BindProps {
   selectedNft: NftData | null;
@@ -24,7 +24,7 @@ export const Bind: React.FC<BindProps> = ({ selectedNft }) => {
     isSuccess,
     transactionUrl,
     transactionHash,
-  } = useBind(selectedNft?.contract, selectedNft?.tokenId);
+  } = useSetPrimary(selectedNft?.contract, selectedNft?.tokenId);
 
   return (
     <div className="space-y-4">
@@ -45,14 +45,14 @@ export const Bind: React.FC<BindProps> = ({ selectedNft }) => {
       {transactionPending ? (
         <Infos>
           {locales.transactionPending} <br />
-          <ExploreLink href={transactionUrl} />
+          {transactionHash ? <ExploreLink href={transactionUrl} /> : null}
         </Infos>
       ) : null}
       {isSuccess ? (
         <Success>
           {locales.transactionSuccess}
           <br />
-          <ExploreLink href={transactionUrl} />
+          {transactionHash ? <ExploreLink href={transactionUrl} /> : null}
         </Success>
       ) : null}
     </div>

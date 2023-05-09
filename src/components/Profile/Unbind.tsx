@@ -5,7 +5,7 @@ import { Infos } from "../ui/Infos";
 import React from "react";
 import { Success } from "../ui/Success";
 import { locales } from "@/locales";
-import { useUnbind } from "@/hooks/useUnbind";
+import { useRemovePrimary } from "@/hooks/useRemovePrimary";
 
 export const Unbind: React.FC = () => {
   const {
@@ -16,7 +16,8 @@ export const Unbind: React.FC = () => {
     transactionPending,
     isSuccess,
     transactionUrl,
-  } = useUnbind();
+    transactionHash,
+  } = useRemovePrimary();
 
   return (
     <div className="space-y-4">
@@ -31,20 +32,20 @@ export const Unbind: React.FC = () => {
       {isError ? (
         <Error>
           {error?.message} <br />
-          <ExploreLink href={transactionUrl} />
+          {transactionHash ? <ExploreLink href={transactionUrl} /> : null}
         </Error>
       ) : null}
       {transactionPending ? (
         <Infos>
           {locales.transactionPending}
           <br />
-          <ExploreLink href={transactionUrl} />
+          {transactionHash ? <ExploreLink href={transactionUrl} /> : null}
         </Infos>
       ) : null}
       {isSuccess ? (
         <Success>
           {locales.transactionSuccess} <br />
-          <ExploreLink href={transactionUrl} />
+          {transactionHash ? <ExploreLink href={transactionUrl} /> : null}
         </Success>
       ) : null}
     </div>
