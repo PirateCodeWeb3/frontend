@@ -4,7 +4,7 @@ import { keyStore } from "@/config/keystore";
 import { useQuery } from "wagmi";
 
 export const useNfts = (address: string | undefined) => {
-  const { data, isLoading, error } = useQuery<OwnedNft[]>(
+  const { data, isLoading, error, refetch } = useQuery<OwnedNft[]>(
     keyStore.nfts.byAddress(address as string).queryKey,
     () =>
       fetch(`/api/nfts/${address}`, {
@@ -21,5 +21,6 @@ export const useNfts = (address: string | undefined) => {
     isLoading,
     error,
     collections: [...new Set(data?.map((nft) => nft.title))],
+    refetch,
   };
 };
