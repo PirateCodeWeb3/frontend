@@ -22,4 +22,10 @@ export const locales = {
   bindSelectedPfp: "Bind selected PFP",
   errorFetchingNfts: "There was an error while fetching your NFTs",
   noNftsFound: "Sorry ! We didn't find any nft in your wallet",
+  mintNft: "Mint NFT",
+  mintNftDescription: "You can mint some NFTs here to try out the app",
+  selectCollection: "Select collection",
+  collections: "Collections",
+  tokenID: "Token ID",
+  mint: "Mint",
 };

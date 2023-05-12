@@ -5,9 +5,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { GOERLI_NETWORK, env } from "@/config";
 
 import { BindPFP } from "@/components/BindPFP";
 import ConnectWallet from "@/components/ConnectWallet/ConnectWallet";
+import { Mint } from "@/components/MintPFP";
 import { Navbar } from "@/components/Navbar";
 import { Profile } from "@/components/Profile";
 import React from "react";
@@ -16,7 +18,9 @@ import { locales } from "@/locales";
 import { useUser } from "@/hooks/useUser";
 import { withHydratationFix } from "@/hoc/withHydratationFix";
 
-function App() {
+const IS_TESTNET = env.NETWORK === GOERLI_NETWORK;
+
+function ProfilePage() {
   const { isConnected } = useUser();
 
   return (
@@ -43,12 +47,13 @@ function App() {
         <div className="order-2">
           <Profile />
         </div>
-        <div className="col-span-2">
+        <div className="col-span-2 space-y-4">
           <BindPFP />
+          {IS_TESTNET ? <Mint /> : null}
         </div>
       </main>
     </div>
   );
 }
 
-export default withHydratationFix(App);
+export default withHydratationFix(ProfilePage);
