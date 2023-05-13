@@ -1,4 +1,4 @@
-import { useAccount, useEnsName, useNetwork } from "wagmi";
+import { useAccount, useEnsAddress, useEnsName, useNetwork } from "wagmi";
 import {
   useAccountModal,
   useChainModal,
@@ -13,11 +13,17 @@ import { useIsMounted } from "@/hooks/useIsMounted";
 const ConnectWallet = (): React.ReactElement | null => {
   const mounted = useIsMounted();
   const { address, isConnected } = useAccount();
-  const { data: ensName } = useEnsName({ address });
+  const { chain } = useNetwork();
+
+  const {
+    data: ensName,
+    isError,
+    isFetching,
+    isFetched,
+  } = useEnsName({ address });
   const { openConnectModal } = useConnectModal();
   const { openAccountModal } = useAccountModal();
   const { openChainModal } = useChainModal();
-  const { chain } = useNetwork();
 
   if (!mounted) {
     return null;

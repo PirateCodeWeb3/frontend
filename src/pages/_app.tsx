@@ -17,9 +17,7 @@ const inter = Inter({
   variable: "--font-inter",
   display: "swap",
 });
-const network = [mainnet, goerli].filter(
-  (network) => network.name === env.NETWORK
-);
+const network = [mainnet, goerli];
 
 const { chains, provider } = configureChains(network, [
   alchemyProvider({ apiKey: env.ALCHEMY_API_KEY }),

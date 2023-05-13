@@ -49,7 +49,7 @@ function ProfilePage() {
         </div>
         <div className="col-span-2 space-y-4">
           <BindPFP />
-          {IS_TESTNET ? <Mint /> : null}
+          {IS_TESTNET && isConnected ? <Mint /> : null}
         </div>
       </main>
     </div>

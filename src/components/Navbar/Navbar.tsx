@@ -13,7 +13,7 @@ export const Navbar: React.FC<NavbarProps> = ({ title }) => {
   const metaTitle = title ? `${title} | ${locales.name}` : locales.metaTile;
 
   return (
-    <header className="absolute inset-x-0 top-0 z-50">
+    <header className="fixed inset-x-0 top-0 z-50">
       <Head>
         <title>{locales.metaTile}</title>
       </Head>

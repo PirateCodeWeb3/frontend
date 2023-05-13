@@ -4,7 +4,7 @@ export const locales = {
   heroTitle: "Connecting web3 people",
   heroDescription:
     "ForeverPFP makes it easier for you to build meaningful connections in the Web3 space. By merging ENS and on-chain PFPs, we help you create a distinct, verifiable identity.",
-  cta: "Connecting web3 people - Bind your PFF today!",
+  cta: "Connect to your PFP community",
   connectWallet: "Connect Wallet",
   wrongNetwork: "Please connect to the correct network",
   noPfpBinded: "Currently you have no PFP binded",
@@ -18,8 +18,8 @@ export const locales = {
   bindWalletInstruction:
     "Before binding your forever PFP you need to connect your wallet first.",
   selectNft:
-    "Select from your nfts the one you want to set as your forever PFP",
-  bindSelectedPfp: "Bind selected PFP",
+    "Select from your nfts the one you want to set as your primary PFP",
+  bindSelectedPfp: "Set selected PFP",
   errorFetchingNfts: "There was an error while fetching your NFTs",
   noNftsFound: "Sorry ! We didn't find any nft in your wallet",
   mintNft: "Mint NFT",
@@ -28,4 +28,36 @@ export const locales = {
   collections: "Collections",
   tokenID: "Token ID",
   mint: "Mint",
+  connectWalletFirst: "Please connect your wallet first",
+  twitterUsername: "twitter username",
+  currentTwitterUsername: "Your current twitter username is",
+  steps: {
+    1: {
+      title: "Register an ENS",
+      description: "First you need to register an ENS name.",
+      cta: "Register",
+    },
+    2: {
+      title: "Set the ENS primary for your address",
+      description: "Next you need to set a primary name for your address.",
+      cta: "Set primary name",
+    },
+    3: {
+      title: "Set your primary PFP to your primary ENS address",
+      description:
+        "Select from your nfts the one you want to set as your primary PFP.",
+      cta: "Connect Wallet",
+    },
+    4: {
+      title: "Find your community members on twitter",
+      description: "Connect your wallet to get started with Forever PFP.",
+      cta: "Find Community",
+    },
+    5: {
+      title: "Set your twitter record",
+      description:
+        "Set your twitter record for your primary ENS to be connected.",
+      cta: "Set your twitter username",
+    },
+  },
 };

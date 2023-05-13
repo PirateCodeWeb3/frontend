@@ -19,11 +19,12 @@ export const useGetPrimary = () => {
     (data as [string | undefined, BigNumber | undefined]) ?? [];
   const tokenId = tknId?.toNumber();
 
-  const pfpBinded =
-    "0x0000000000000000000000000000000000000000" === contractAddress &&
-    tokenId === 0
+  const pfpBinded = data
+    ? "0x0000000000000000000000000000000000000000" === contractAddress &&
+      tokenId === 0
       ? false
-      : true;
+      : true
+    : false;
 
   return {
     isLoading,
