@@ -4,7 +4,7 @@ export const locales = {
   heroTitle: "Connecting web3 people",
   heroDescription:
     "ForeverPFP makes it easier for you to build meaningful connections in the Web3 space. By merging ENS and on-chain PFPs, we help you create a distinct, verifiable identity.",
-  cta: "Connecting web3 people - Bind your PFF today!",
+  cta: "Connect to your PFP community onchain in 5 steps",
   connectWallet: "Connect Wallet",
   wrongNetwork: "Please connect to the correct network",
   noPfpBinded: "Currently you have no PFP binded",
