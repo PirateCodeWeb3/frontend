@@ -144,7 +144,6 @@ export const Mint = (): React.ReactElement => {
           <div className="space-y-2">
             <Label htmlFor="tokenId">{locales.tokenID}</Label>
             <Input
-              type="number"
               value={tokenId}
               onChange={(e) => setTokenId(+e.target.value)}
               min={0}
