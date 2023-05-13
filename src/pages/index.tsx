@@ -72,7 +72,7 @@ export default function Home() {
 
                   <div className="mt-10 flex items-center gap-x-6">
                     <Link
-                      href={routes.PROFILE}
+                      href={routes.GETSTARTED}
                       className={buttonVariants({
                         size: "lg",
                       })}
