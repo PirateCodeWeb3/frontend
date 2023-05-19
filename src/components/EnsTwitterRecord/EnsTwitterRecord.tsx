@@ -40,10 +40,7 @@ export const EnsTwitterRecord: React.FC = () => {
           {locales.steps[5].cta}
         </Button>
       </div>
-      <Text>
-        {locales.currentTwitterUsername}{" "}
-        <span className="font-bold">{twitter}</span>
-      </Text>
+
       {isError ? (
         <Error>
           {error?.message} <br />

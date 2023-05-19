@@ -117,6 +117,13 @@ export const StepByStep = (): React.ReactElement | null => {
         >
           <CardDescription className="pb-4">
             {locales.steps[5].description}
+            <br />
+            {twitter ? (
+              <span>
+                {locales.currentTwitterUsername}{" "}
+                <span className="font-bold text-primary">{twitter}</span>
+              </span>
+            ) : null}
           </CardDescription>
           <EnsTwitterRecord />
         </Step>
