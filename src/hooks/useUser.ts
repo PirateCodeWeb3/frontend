@@ -1,9 +1,8 @@
-import { useAccount, useEnsAvatar, useEnsName, useQuery } from "wagmi";
+import { useAccount, useEnsName } from "wagmi";
 
 export const useUser = () => {
   const { isConnected, address } = useAccount();
-  const { data: ensName } = useEnsName({ address });
-  const { data: ensAvatar } = useEnsAvatar({ address });
+  const { data: ensName, isLoading } = useEnsName({ address });
 
   const formattedAdr = address
     ? `${address.substring(0, 8)}…${address.substring(
@@ -16,7 +15,7 @@ export const useUser = () => {
     isConnected,
     address,
     ensName,
-    ensAvatar,
     formattedAdr,
+    isLoadingEnsName: isLoading,
   };
 };

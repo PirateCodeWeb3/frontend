@@ -21,3 +21,5 @@ export const env = {
   TX_EXPLORER:
     process.env.NEXT_PUBLIC_TX_EXPLORER ?? "https://goerli.etherscan.io/tx",
 };
+
+export const TWITTER_RECORD = "com.twitter";
