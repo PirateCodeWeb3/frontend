@@ -2,21 +2,23 @@ import { Button } from "../ui/button";
 import { Error } from "../ui/Error";
 import { ExploreLink } from "../ExplorerLink";
 import { Infos } from "../ui/Infos";
-import { NftData } from "./BindPFP";
+import { NftData } from "./SetPrimaryPFP";
 import React from "react";
 import { Success } from "../ui/Success";
 import { locales } from "@/locales";
 import { useSetPrimary } from "@/hooks/useSetPrimary";
 
-interface BindProps {
+interface SetPrimaryPFPButtonProps {
   selectedNft: NftData | null;
 }
 
 export default ExploreLink;
 
-export const Bind: React.FC<BindProps> = ({ selectedNft }) => {
+export const SetPrimaryPFPButton: React.FC<SetPrimaryPFPButtonProps> = ({
+  selectedNft,
+}) => {
   const {
-    bind,
+    setPrimaryPFP,
     error,
     isError,
     isLoading,
@@ -31,10 +33,10 @@ export const Bind: React.FC<BindProps> = ({ selectedNft }) => {
       <Button
         className="w-full"
         disabled={selectedNft === null}
-        onClick={bind}
+        onClick={setPrimaryPFP}
         loading={isLoading}
       >
-        {locales.bindSelectedPfp}
+        {locales.setSelectedPfp}
       </Button>
       {isError ? (
         <Error>

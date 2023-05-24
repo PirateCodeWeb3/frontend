@@ -10,13 +10,10 @@ import type { AppProps } from "next/app";
 import { Inter } from "next/font/google";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { env } from "@/config";
+import { locales } from "@/locales";
 import { publicProvider } from "wagmi/providers/public";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
+const fontSans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const network = [mainnet, goerli];
 
 const { chains, provider } = configureChains(network, [
@@ -25,7 +22,7 @@ const { chains, provider } = configureChains(network, [
 ]);
 
 const { connectors } = getDefaultWallets({
-  appName: "Forever PFP",
+  appName: locales.name,
   chains,
 });
 
@@ -39,7 +36,7 @@ const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div className={`${inter.className}`}>
+    <div className={`${fontSans.variable}`}>
       <QueryClientProvider client={queryClient}>
         <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains}>
