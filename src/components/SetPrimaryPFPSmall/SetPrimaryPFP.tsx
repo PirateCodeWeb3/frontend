@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 
-import { Bind } from "./Bind";
 import { Error } from "../ui/Error";
 import { PickListPlaceholder } from "./Placeholder";
 import { PickerList } from "./PickerList";
+import { SetPrimaryPFPButton } from "./SetPrimaryPFPBtn";
 import { locales } from "@/locales";
 import { useNfts } from "@/hooks/useNfts";
 import { useUser } from "@/hooks/useUser";
@@ -13,7 +13,7 @@ export interface NftData {
   tokenId: number;
 }
 
-export const BindPFP: React.FC = ({}) => {
+export const SetPrimaryPFP: React.FC = ({}) => {
   const { isConnected, address } = useUser();
   const { nfts, isLoading, error } = useNfts(address);
   const [selectedNft, setSelectedNft] = React.useState<NftData | null>(null);
@@ -39,7 +39,7 @@ export const BindPFP: React.FC = ({}) => {
         onSelect={(data) => setSelectedNft(data)}
         selected={selectedNft}
       />
-      <Bind selectedNft={selectedNft} />
+      <SetPrimaryPFPButton selectedNft={selectedNft} />
     </>
   );
 };

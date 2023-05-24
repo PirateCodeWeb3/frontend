@@ -21,7 +21,6 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import React from "react";
 import { Success } from "../ui/Success";
-import { Text } from "../ui/text";
 import { locales } from "@/locales";
 import { useMint } from "@/hooks/useMint";
 

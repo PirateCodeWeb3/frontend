@@ -17,5 +17,6 @@ export const useUser = () => {
     ensName,
     formattedAdr,
     isLoadingEnsName: isLoading,
+    user: ensName || formattedAdr,
   };
 };

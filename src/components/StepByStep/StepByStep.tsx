@@ -6,38 +6,29 @@ import {
   CardTitle,
 } from "../ui/card";
 
-import { BindPFP } from "../BindPFPSmall";
 import { EnsTwitterRecord } from "../EnsTwitterRecord/EnsTwitterRecord";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import { SetPrimaryPFP } from "../SetPrimaryPFPSmall";
 import { Step } from "./Step";
 import { locales } from "@/locales";
 import { useGetPrimary } from "@/hooks/useGetPrimary";
 import { useGetTwitterAccount } from "@/hooks/useGetTwitterAccount";
-import { useIsMounted } from "@/hooks/useIsMounted";
 import { useUser } from "@/hooks/useUser";
+import { withHydratationFix } from "@/hoc/withHydratationFix";
 
-export const StepByStep = (): React.ReactElement | null => {
-  const isMounted = useIsMounted();
+export const StepByStep = withHydratationFix((): React.ReactElement | null => {
   const { ensName, isLoadingEnsName } = useUser();
-  const { pfpBinded, isLoading: isLoadingPrimaryPFP } = useGetPrimary();
+  const { pfpSet, isLoading: isLoadingPrimaryPFP } = useGetPrimary();
   const { twitter, isLoading: isLoadingTwitter } =
     useGetTwitterAccount(ensName);
 
-  if (isMounted === false) {
-    return null;
-  }
   return (
     <Card>
       <CardHeader className="pb-12">
-        <CardTitle>
-          Connect to your PFP community onchain in five steps
-        </CardTitle>
-        <CardDescription>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime
-          exercitationem sunt quam. Ipsum amet repudiandae reprehenderi
-        </CardDescription>
+        <CardTitle>{locales.stepsTitle}</CardTitle>
+        <CardDescription>{locales.stepsDescription}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <Step
@@ -85,38 +76,23 @@ export const StepByStep = (): React.ReactElement | null => {
         <Step
           step={3}
           title={locales.steps[3].title}
-          isOk={pfpBinded}
+          isOk={pfpSet}
           isLoading={isLoadingPrimaryPFP}
         >
           <CardDescription className="pb-4">
             {locales.steps[3].description}
           </CardDescription>
-          <BindPFP />
-        </Step>
-
-        <Step step={4} title={locales.steps[4].title}>
-          <CardDescription className="flex pb-4">
-            {locales.steps[4].description}
-            <Link
-              href={"https://twitter.com/"}
-              className="ml-1 flex items-center text-sm font-bold text-primary underline underline-offset-4"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <ExternalLink size={16} className="mr-1" />
-              {locales.steps[4].cta}
-            </Link>
-          </CardDescription>
+          <SetPrimaryPFP />
         </Step>
 
         <Step
-          step={5}
-          title={locales.steps[5].title}
+          step={4}
+          title={locales.steps[4].title}
           isOk={!!twitter}
           isLoading={isLoadingTwitter}
         >
           <CardDescription className="pb-4">
-            {locales.steps[5].description}
+            {locales.steps[4].description}
             <br />
             {twitter ? (
               <span>
@@ -127,10 +103,25 @@ export const StepByStep = (): React.ReactElement | null => {
           </CardDescription>
           <EnsTwitterRecord />
         </Step>
+
+        <Step step={5} title={locales.steps[5].title}>
+          <CardDescription className="pb-4">
+            {locales.steps[5].description}
+            <Link
+              href={"https://twitter.com/"}
+              className="ml-1 mt-3 flex items-center text-sm font-bold text-primary underline underline-offset-4"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ExternalLink size={16} className="mr-1" />
+              {locales.steps[5].cta}
+            </Link>
+          </CardDescription>
+        </Step>
       </CardContent>
     </Card>
   );
-};
+});
 
 const classes = /** class={ */ {
   cta: "ml-1 flex items-center text-sm font-bold text-primary underline underline-offset-4",

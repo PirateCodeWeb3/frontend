@@ -16,7 +16,7 @@ export const EnsTwitterRecord: React.FC = () => {
   const [value, setTwitterValue] = React.useState("");
   const debouncedValue = useDebounce(value, 1000);
   const { ensName } = useUser();
-  const { twitter } = useGetTwitterAccount(ensName);
+
   const {
     setTwitter,
     error,
@@ -37,7 +37,7 @@ export const EnsTwitterRecord: React.FC = () => {
           />
         </div>
         <Button onClick={setTwitter} loading={isLoading}>
-          {locales.steps[5].cta}
+          {locales.steps[4].cta}
         </Button>
       </div>
 

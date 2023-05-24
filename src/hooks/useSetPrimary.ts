@@ -47,7 +47,7 @@ export const useSetPrimary = (
     isLoading,
     error: prepareError || error || transactionError,
     isError: isPrepareError || isError || isTransactionError,
-    bind: write,
+    setPrimaryPFP: write,
     transactionPending,
     transactionHash: data?.hash,
     transactionUrl: `${env.TX_EXPLORER}/${data?.hash}`,

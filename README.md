@@ -1,6 +1,6 @@
-# ForeverPFP Frontend
+# primary-pfp-frontend
 
-Website for Forever PFP
+Frontend for primary-pfp
 
 ## Get started
 
@@ -20,7 +20,7 @@ NEXT_PUBLIC_TX_EXPLORER=
 - `ALCHEMY_ID` : Alchemy ID use in api part of next.js
 - `NEXT_PUBLIC_NETWORK` : Selected Network use in api part of next.js. Allowed values Goerli, Ethereum
 - `NETWORK` : Selected Network use in api part of next.js. Allowed values Goerli, Ethereum
-- `NEXT_PUBLIC_TX_EXPLORER` : Blockchain explorer to see transactions ie: https://goerli.etherscan.io/tx/
+- `NEXT_PUBLIC_TX_EXPLORER` : Blockchain explorer to see transactions ie: https://goerli.etherscan.io/tx
 - `NEXT_PRIMARY_PFP_CONTRACT` : Contract use in frontend part of next.js
 - `PRIMARY_PFP_CONTRACT` : Contract use in api part of next.js
 
@@ -31,3 +31,8 @@ By default only `NEXT_PUBLIC_ALCHEMY_ID` and `ALCHEMY_ID` are required all other
 ```
 yarn & yarn dev
 ```
+
+## Testnet features
+
+On the testnet you can mint some nfts to try the applications and set them as your primary pfp.
+To do this go to the /mint page

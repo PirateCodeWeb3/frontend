@@ -19,7 +19,7 @@ export const useGetPrimary = () => {
     (data as [string | undefined, BigNumber | undefined]) ?? [];
   const tokenId = tknId?.toNumber();
 
-  const pfpBinded = data
+  const pfpSet = data
     ? "0x0000000000000000000000000000000000000000" === contractAddress &&
       tokenId === 0
       ? false
@@ -31,7 +31,7 @@ export const useGetPrimary = () => {
     error,
     tokenId,
     contractAddress,
-    pfpBinded,
+    pfpSet,
     refetch,
   };
 };
