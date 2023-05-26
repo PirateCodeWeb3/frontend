@@ -1,21 +1,23 @@
 [
   {
+    "inputs": [
+      { "internalType": "address", "name": "dciAddress", "type": "address" },
+      { "internalType": "address", "name": "wxiAddress", "type": "address" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
     "anonymous": false,
     "inputs": [
       {
         "indexed": true,
         "internalType": "address",
-        "name": "previousOwner",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "newOwner",
+        "name": "contract_",
         "type": "address"
       }
     ],
-    "name": "OwnershipTransferred",
+    "name": "CollectionAdded",
     "type": "event"
   },
   {
@@ -24,29 +26,11 @@
       {
         "indexed": true,
         "internalType": "address",
-        "name": "from",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
         "name": "contract_",
         "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
       }
     ],
-    "name": "PrimaryDelegateSet",
+    "name": "CollectionRemoved",
     "type": "event"
   },
   {
@@ -101,8 +85,21 @@
   },
   {
     "inputs": [],
-    "name": "BINDING_FEE",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "getCollections",
+    "outputs": [
+      { "internalType": "address[]", "name": "", "type": "address[]" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "contract_", "type": "address" }
+    ],
+    "name": "getCommunities",
+    "outputs": [
+      { "internalType": "address[]", "name": "", "type": "address[]" }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
@@ -129,25 +126,11 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "owner",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       { "internalType": "address", "name": "contract_", "type": "address" },
       { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
     ],
     "name": "removePrimary",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "renounceOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -159,34 +142,36 @@
     ],
     "name": "setPrimary",
     "outputs": [],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [
       { "internalType": "address", "name": "contract_", "type": "address" },
-      { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-      { "internalType": "address", "name": "delegate", "type": "address" }
+      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
     ],
-    "name": "setPrimaryForDelegate",
+    "name": "setPrimaryByDelegateCash",
     "outputs": [],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "newOwner", "type": "address" }
+      { "internalType": "address", "name": "contract_", "type": "address" },
+      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
     ],
-    "name": "transferOwnership",
+    "name": "setPrimaryByWarmXyz",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "withdraw",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "inputs": [
+      { "internalType": "bytes4", "name": "interfaceId", "type": "bytes4" }
+    ],
+    "name": "supportsInterface",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
     "type": "function"
   }
 ]

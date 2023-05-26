@@ -11,10 +11,10 @@ import { useGetPrimary } from "./useGetPrimary";
 
 export const useSetPrimary = (
   nftContract: string | undefined,
-  tokenId: number | undefined
+  tokenId: number | undefined,
+  useDelegateCash?: boolean
 ) => {
   const { refetch } = useGetPrimary();
-
   const {
     config,
     isError: isPrepareError,
@@ -22,12 +22,9 @@ export const useSetPrimary = (
   } = usePrepareContractWrite({
     address: env.PRIMARY_PFP_CONTRACT,
     abi: PRIMARY_PFP_ABI,
-    functionName: "setPrimary",
+    functionName: useDelegateCash ? "setPrimaryByDelegateCash" : "setPrimary",
     args: [nftContract, tokenId],
     enabled: !!nftContract && !!tokenId,
-    overrides: {
-      value: ethers.utils.parseEther("0.01"),
-    },
   });
   const { data, isLoading, write, error, isError } = useContractWrite(config);
 

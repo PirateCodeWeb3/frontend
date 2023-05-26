@@ -2,13 +2,16 @@
 
 export const GOERLI_NETWORK = "Goerli";
 const GOERLI_PRIMARY_PFP_CONTRACT =
-  "0xD2068Fea1e1123a68007b836178f03dEf5aD7717";
+  "0x6CD9Ef444850d92E5F5F79d011785D41569220DA";
 const GOERLI_PRIMARY_VERIFICATION_CONTRACT =
-  "0xD2068Fea1e1123a68007b836178f03dEf5aD7717";
+  "0x036F0d017f5D11080Dc426De30A455687C9bEf3a";
+
+const PROVIDER_URL = "https://eth-goerli.alchemyapi.io/v2";
+const ALCHEMY_API_KEY =
+  process.env.NEXT_PUBLIC_ALCHEMY_ID ?? process.env.ALCHEMY_ID ?? "";
 
 export const env = {
-  ALCHEMY_API_KEY:
-    process.env.NEXT_PUBLIC_ALCHEMY_ID ?? process.env.ALCHEMY_ID ?? "",
+  ALCHEMY_API_KEY,
   PRIMARY_PFP_CONTRACT: (process.env.NEXT_PUBLIC_PRIMARY_PFP_CONTRACT ??
     process.env.PRIMARY_PFP_CONTRACT ??
     GOERLI_PRIMARY_PFP_CONTRACT) as `0x${string}`,
@@ -20,6 +23,9 @@ export const env = {
     process.env.NEXT_PUBLIC_NETWORK ?? process.env.NETWORK ?? GOERLI_NETWORK,
   TX_EXPLORER:
     process.env.NEXT_PUBLIC_TX_EXPLORER ?? "https://goerli.etherscan.io/tx",
+  PROVIDER_URL: `${
+    process.env.NEXT_PUBLIC_PROVIDER_URL ?? PROVIDER_URL
+  }/${ALCHEMY_API_KEY}`,
 };
 
 export const TWITTER_RECORD = "com.twitter";

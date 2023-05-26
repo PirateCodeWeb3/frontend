@@ -1,7 +1,7 @@
 import { Nft, OwnedNftsResponse } from "alchemy-sdk";
 
 import { keyStore } from "@/config/keystore";
-import { useQuery } from "wagmi";
+import { useQuery } from "@tanstack/react-query";
 
 export const useNftMetata = (
   contract: string | undefined,

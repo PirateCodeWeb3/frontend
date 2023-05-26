@@ -10,12 +10,14 @@ import { useSetPrimary } from "@/hooks/useSetPrimary";
 
 interface SetPrimaryPFPButtonProps {
   selectedNft: NftData | null;
+  useDelegateCash: boolean;
 }
 
 export default ExploreLink;
 
 export const SetPrimaryPFPButton: React.FC<SetPrimaryPFPButtonProps> = ({
   selectedNft,
+  useDelegateCash,
 }) => {
   const {
     setPrimaryPFP,
@@ -26,13 +28,17 @@ export const SetPrimaryPFPButton: React.FC<SetPrimaryPFPButtonProps> = ({
     isSuccess,
     transactionUrl,
     transactionHash,
-  } = useSetPrimary(selectedNft?.contract, selectedNft?.tokenId);
+  } = useSetPrimary(
+    selectedNft?.contract,
+    selectedNft?.tokenId,
+    useDelegateCash
+  );
 
   return (
     <div className="space-y-4">
       <Button
         className="w-full"
-        disabled={selectedNft === null}
+        disabled={selectedNft === null || transactionPending}
         onClick={setPrimaryPFP}
         loading={isLoading}
       >
