@@ -8,6 +8,7 @@ import { goerli, mainnet } from "wagmi/chains";
 
 import type { AppProps } from "next/app";
 import { Inter } from "next/font/google";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { env } from "@/config";
 import { locales } from "@/locales";
@@ -32,7 +33,9 @@ const wagmiClient = createClient({
   provider,
 });
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { retry: false } },
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -43,6 +46,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </RainbowKitProvider>
         </WagmiConfig>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </div>
   );

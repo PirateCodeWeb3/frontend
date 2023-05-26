@@ -6,6 +6,7 @@ import {
   CardTitle,
 } from "../ui/card";
 
+import { Checkbox } from "../../../rc/components/ui/checkbox";
 import { EnsTwitterRecord } from "../EnsTwitterRecord/EnsTwitterRecord";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
@@ -23,6 +24,7 @@ export const StepByStep = withHydratationFix((): React.ReactElement | null => {
   const { pfpSet, isLoading: isLoadingPrimaryPFP } = useGetPrimary();
   const { twitter, isLoading: isLoadingTwitter } =
     useGetTwitterAccount(ensName);
+  const [isDelegateCash, setIsDelegateCash] = React.useState(false);
 
   return (
     <Card>
@@ -81,8 +83,22 @@ export const StepByStep = withHydratationFix((): React.ReactElement | null => {
         >
           <CardDescription className="pb-4">
             {locales.steps[3].description}
+            <span className="mt-4 flex items-center space-x-2">
+              <Checkbox
+                id="delegatecash"
+                checked={isDelegateCash}
+                onCheckedChange={() => setIsDelegateCash(!isDelegateCash)}
+              />
+              <label
+                htmlFor="terms2"
+                className="text-sm font-medium leading-none"
+              >
+                {locales.useDelegateCash}
+              </label>
+            </span>
           </CardDescription>
-          <SetPrimaryPFP />
+
+          <SetPrimaryPFP useDelegateCash={isDelegateCash} />
         </Step>
 
         <Step

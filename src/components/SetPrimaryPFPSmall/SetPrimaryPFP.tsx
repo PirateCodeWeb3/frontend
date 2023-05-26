@@ -5,6 +5,7 @@ import { PickListPlaceholder } from "./Placeholder";
 import { PickerList } from "./PickerList";
 import { SetPrimaryPFPButton } from "./SetPrimaryPFPBtn";
 import { locales } from "@/locales";
+import { useGetDelegationsByDelegate } from "@/hooks/useGetDelegationsByDelegate";
 import { useNfts } from "@/hooks/useNfts";
 import { useUser } from "@/hooks/useUser";
 
@@ -13,9 +14,19 @@ export interface NftData {
   tokenId: number;
 }
 
-export const SetPrimaryPFP: React.FC = ({}) => {
+export const SetPrimaryPFP: React.FC<{ useDelegateCash: boolean }> = ({
+  useDelegateCash,
+}) => {
   const { isConnected, address } = useUser();
-  const { nfts, isLoading, error } = useNfts(address);
+  const {
+    isLoading: isLoadingDelegations,
+    error: errorDelegations,
+    addresses,
+  } = useGetDelegationsByDelegate(address, useDelegateCash);
+  const { nfts, isLoading, error } = useNfts(
+    address,
+    useDelegateCash ? addresses : undefined
+  );
   const [selectedNft, setSelectedNft] = React.useState<NftData | null>(null);
 
   useEffect(() => {
@@ -24,11 +35,11 @@ export const SetPrimaryPFP: React.FC = ({}) => {
 
   if (!isConnected) return null;
 
-  if (isLoading) {
+  if (isLoading || (useDelegateCash && isLoadingDelegations)) {
     return <PickListPlaceholder />;
   }
 
-  if (error) {
+  if (error || (useDelegateCash && errorDelegations)) {
     return <Error>{locales.errorFetchingNfts}</Error>;
   }
 
@@ -39,7 +50,10 @@ export const SetPrimaryPFP: React.FC = ({}) => {
         onSelect={(data) => setSelectedNft(data)}
         selected={selectedNft}
       />
-      <SetPrimaryPFPButton selectedNft={selectedNft} />
+      <SetPrimaryPFPButton
+        selectedNft={selectedNft}
+        useDelegateCash={useDelegateCash}
+      />
     </>
   );
 };
