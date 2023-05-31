@@ -18,17 +18,17 @@ export default async function handler(
     return;
   }
 
-  const { address, vaults } = req.query;
+  const { addresses } = req.query;
 
   let data: OwnedNft[] = [];
-  if (vaults) {
-    const vaultsArray = (vaults as string)?.split(",");
-    data = await Promise.all(
-      vaultsArray.map((vault) => fetchAllNfts(vault))
-    ).then((results) => results.flat());
-  } else {
-    data = await fetchAllNfts(address as string);
-  }
+
+  data = await Promise.all(
+    ((addresses as string[] | undefined) ?? [])
+      .filter(
+        (address) => address != "0x0000000000000000000000000000000000000000"
+      )
+      .map((address) => fetchAllNfts(address))
+  ).then((results) => results.flat());
 
   const withoutERC1155 = data.filter((nft) => nft.tokenType !== "ERC1155");
   return res.status(200).json(withoutERC1155);

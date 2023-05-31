@@ -5,12 +5,19 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import React, { useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
-import { Checkbox } from "../../../rc/components/ui/checkbox";
 import { EnsTwitterRecord } from "../EnsTwitterRecord/EnsTwitterRecord";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import { SET_PRIMARY_METHOD } from "@/hooks/useSetPrimary";
 import { SetPrimaryPFP } from "../SetPrimaryPFPSmall";
 import { Step } from "./Step";
 import { locales } from "@/locales";
@@ -24,7 +31,10 @@ export const StepByStep = withHydratationFix((): React.ReactElement | null => {
   const { pfpSet, isLoading: isLoadingPrimaryPFP } = useGetPrimary();
   const { twitter, isLoading: isLoadingTwitter } =
     useGetTwitterAccount(ensName);
-  const [isDelegateCash, setIsDelegateCash] = React.useState(false);
+
+  const [method, setMethod] = useState<SET_PRIMARY_METHOD>(
+    SET_PRIMARY_METHOD.NORMAL
+  );
 
   return (
     <Card>
@@ -81,59 +91,66 @@ export const StepByStep = withHydratationFix((): React.ReactElement | null => {
           isOk={pfpSet}
           isLoading={isLoadingPrimaryPFP}
         >
-          <CardDescription className="pb-4">
-            {locales.steps[3].description}
-            <span className="mt-4 flex items-center space-x-2">
-              <Checkbox
-                id="delegatecash"
-                checked={isDelegateCash}
-                onCheckedChange={() => setIsDelegateCash(!isDelegateCash)}
-              />
-              <label
-                htmlFor="terms2"
-                className="text-sm font-medium leading-none"
-              >
-                {locales.useDelegateCash}
-              </label>
-            </span>
-          </CardDescription>
+          <CardDescription>{locales.steps[3].description}</CardDescription>
+          <div className="pb-4">
+            <Select value={method} onValueChange={(e) => setMethod(e as any)}>
+              <SelectTrigger className="w-[300px]">
+                <SelectValue placeholder={locales.methodPlaceHolder} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value={SET_PRIMARY_METHOD.NORMAL}>
+                  {locales.noDelegation}
+                </SelectItem>
+                <SelectItem value={SET_PRIMARY_METHOD.DELEGATECASH}>
+                  {locales.delegateCash}
+                </SelectItem>
+                <SelectItem value={SET_PRIMARY_METHOD.WARMXYZ}>
+                  {locales.warmXYZ}
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
 
-          <SetPrimaryPFP useDelegateCash={isDelegateCash} />
+          <SetPrimaryPFP method={method} />
         </Step>
 
-        <Step
-          step={4}
-          title={locales.steps[4].title}
-          isOk={!!twitter}
-          isLoading={isLoadingTwitter}
-        >
-          <CardDescription className="pb-4">
-            {locales.steps[4].description}
-            <br />
-            {twitter ? (
-              <span>
-                {locales.currentTwitterUsername}{" "}
-                <span className="font-bold text-primary">{twitter}</span>
-              </span>
-            ) : null}
-          </CardDescription>
-          <EnsTwitterRecord />
-        </Step>
-
-        <Step step={5} title={locales.steps[5].title}>
-          <CardDescription className="pb-4">
-            {locales.steps[5].description}
-            <Link
-              href={"https://twitter.com/"}
-              className="ml-1 mt-3 flex items-center text-sm font-bold text-primary underline underline-offset-4"
-              target="_blank"
-              rel="noopener noreferrer"
+        {pfpSet ? (
+          <>
+            <Step
+              step={4}
+              title={locales.steps[4].title}
+              isOk={!!twitter}
+              isLoading={isLoadingTwitter}
             >
-              <ExternalLink size={16} className="mr-1" />
-              {locales.steps[5].cta}
-            </Link>
-          </CardDescription>
-        </Step>
+              <CardDescription className="pb-4">
+                {locales.steps[4].description}
+                <br />
+                {twitter ? (
+                  <span>
+                    {locales.currentTwitterUsername}{" "}
+                    <span className="font-bold text-primary">{twitter}</span>
+                  </span>
+                ) : null}
+              </CardDescription>
+              <EnsTwitterRecord />
+            </Step>
+
+            <Step step={5} title={locales.steps[5].title}>
+              <CardDescription className="pb-4">
+                {locales.steps[5].description}
+                <Link
+                  href={"https://twitter.com/"}
+                  className="ml-1 mt-3 flex items-center text-sm font-bold text-primary underline underline-offset-4"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink size={16} className="mr-1" />
+                  {locales.steps[5].cta}
+                </Link>
+              </CardDescription>
+            </Step>
+          </>
+        ) : null}
       </CardContent>
     </Card>
   );

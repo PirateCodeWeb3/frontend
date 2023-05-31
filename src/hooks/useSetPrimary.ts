@@ -9,10 +9,27 @@ import { env } from "@/config";
 import { ethers } from "ethers";
 import { useGetPrimary } from "./useGetPrimary";
 
+export const enum SET_PRIMARY_METHOD {
+  NORMAL = "NORMAL",
+  DELEGATECASH = "DELEGATECASH",
+  WARMXYZ = "WARMXYZ",
+}
+
+function getSetPrimaryFunctionFromMethod(method: SET_PRIMARY_METHOD) {
+  switch (method) {
+    case SET_PRIMARY_METHOD.DELEGATECASH:
+      return "setPrimaryByDelegateCash";
+    case SET_PRIMARY_METHOD.WARMXYZ:
+      return "setPrimaryByWarmXyz";
+    default:
+      return "setPrimary";
+  }
+}
+
 export const useSetPrimary = (
   nftContract: string | undefined,
   tokenId: number | undefined,
-  useDelegateCash?: boolean
+  method: SET_PRIMARY_METHOD
 ) => {
   const { refetch } = useGetPrimary();
   const {
@@ -22,7 +39,7 @@ export const useSetPrimary = (
   } = usePrepareContractWrite({
     address: env.PRIMARY_PFP_CONTRACT,
     abi: PRIMARY_PFP_ABI,
-    functionName: useDelegateCash ? "setPrimaryByDelegateCash" : "setPrimary",
+    functionName: getSetPrimaryFunctionFromMethod(method),
     args: [nftContract, tokenId],
     enabled: !!nftContract && !!tokenId,
   });

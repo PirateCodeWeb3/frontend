@@ -1,3 +1,5 @@
+import { SET_PRIMARY_METHOD, useSetPrimary } from "@/hooks/useSetPrimary";
+
 import { Button } from "../ui/button";
 import { Error } from "../ui/Error";
 import { ExploreLink } from "../ExplorerLink";
@@ -6,18 +8,17 @@ import { NftData } from "./SetPrimaryPFP";
 import React from "react";
 import { Success } from "../ui/Success";
 import { locales } from "@/locales";
-import { useSetPrimary } from "@/hooks/useSetPrimary";
 
 interface SetPrimaryPFPButtonProps {
   selectedNft: NftData | null;
-  useDelegateCash: boolean;
+  method: SET_PRIMARY_METHOD;
 }
 
 export default ExploreLink;
 
 export const SetPrimaryPFPButton: React.FC<SetPrimaryPFPButtonProps> = ({
   selectedNft,
-  useDelegateCash,
+  method,
 }) => {
   const {
     setPrimaryPFP,
@@ -28,11 +29,7 @@ export const SetPrimaryPFPButton: React.FC<SetPrimaryPFPButtonProps> = ({
     isSuccess,
     transactionUrl,
     transactionHash,
-  } = useSetPrimary(
-    selectedNft?.contract,
-    selectedNft?.tokenId,
-    useDelegateCash
-  );
+  } = useSetPrimary(selectedNft?.contract, selectedNft?.tokenId, method);
 
   return (
     <div className="space-y-4">

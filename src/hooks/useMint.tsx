@@ -11,7 +11,7 @@ import { useUser } from "./useUser";
 
 export const useMint = (contract: string | null, tokenId: number) => {
   const { address } = useUser();
-  const { refetch } = useNfts(address, []);
+  const { refetch } = useNfts(address);
   const {
     config: mintConfig,
     error: prepareError,
