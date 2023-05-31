@@ -68,5 +68,8 @@ export const locales = {
   mintForTest: "Mint for test",
   mintForTestDescription:
     "On testnet you can mint some NFTs to try out the app. After minting some NFTs you can set one of them as your primary PFP.",
-  useDelegateCash: "I want to use Delegate Cash",
+  methodPlaceHolder: "Select the method to set primary pfp",
+  noDelegation: "With my current wallet",
+  delegateCash: "With Delegate.cash",
+  warmXYZ: "With Warm.xyz",
 };

@@ -3,10 +3,13 @@ import React, { useEffect } from "react";
 import { Error } from "../ui/Error";
 import { PickListPlaceholder } from "./Placeholder";
 import { PickerList } from "./PickerList";
+import { SET_PRIMARY_METHOD } from "@/hooks/useSetPrimary";
 import { SetPrimaryPFPButton } from "./SetPrimaryPFPBtn";
 import { locales } from "@/locales";
+import { useGetColdWalletsWarmXYZ } from "@/hooks/useGetColdWalletsWarmXYZ";
 import { useGetDelegationsByDelegate } from "@/hooks/useGetDelegationsByDelegate";
 import { useNfts } from "@/hooks/useNfts";
+import { useNftsToSetPrimary } from "@/hooks/useNftsToSetPrimary";
 import { useUser } from "@/hooks/useUser";
 
 export interface NftData {
@@ -14,20 +17,12 @@ export interface NftData {
   tokenId: number;
 }
 
-export const SetPrimaryPFP: React.FC<{ useDelegateCash: boolean }> = ({
-  useDelegateCash,
+export const SetPrimaryPFP: React.FC<{ method: SET_PRIMARY_METHOD }> = ({
+  method,
 }) => {
   const { isConnected, address } = useUser();
-  const {
-    isLoading: isLoadingDelegations,
-    error: errorDelegations,
-    addresses,
-  } = useGetDelegationsByDelegate(address, useDelegateCash);
-  const { nfts, isLoading, error } = useNfts(
-    address,
-    useDelegateCash ? addresses : undefined
-  );
   const [selectedNft, setSelectedNft] = React.useState<NftData | null>(null);
+  const { isLoading, error, nfts } = useNftsToSetPrimary(address, method);
 
   useEffect(() => {
     setSelectedNft(null);
@@ -35,11 +30,11 @@ export const SetPrimaryPFP: React.FC<{ useDelegateCash: boolean }> = ({
 
   if (!isConnected) return null;
 
-  if (isLoading || (useDelegateCash && isLoadingDelegations)) {
+  if (isLoading) {
     return <PickListPlaceholder />;
   }
 
-  if (error || (useDelegateCash && errorDelegations)) {
+  if (error) {
     return <Error>{locales.errorFetchingNfts}</Error>;
   }
 
@@ -50,10 +45,7 @@ export const SetPrimaryPFP: React.FC<{ useDelegateCash: boolean }> = ({
         onSelect={(data) => setSelectedNft(data)}
         selected={selectedNft}
       />
-      <SetPrimaryPFPButton
-        selectedNft={selectedNft}
-        useDelegateCash={useDelegateCash}
-      />
+      <SetPrimaryPFPButton selectedNft={selectedNft} method={method} />
     </>
   );
 };

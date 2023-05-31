@@ -21,10 +21,10 @@ export const useGetDelegationsByDelegate = (
     { enabled: !!address && !!enable }
   );
 
-  const addresses = data?.map((d) => d.vault) ?? [];
+  let addresses = data ? data?.map((d) => d.vault) : undefined;
 
   return {
-    addresses: [...new Set(addresses)],
+    addresses,
     isLoading,
     error,
   };

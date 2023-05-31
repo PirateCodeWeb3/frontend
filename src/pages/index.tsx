@@ -16,7 +16,7 @@ export default function Home() {
     <div className={"container py-36 font-sans"}>
       <Navbar />
       <main className="sm:pt-4 md:pt-8 lg:pt-32">
-        <div className="items-start lg:grid lg:grid-cols-2 lg:gap-24">
+        <div className="items-center lg:grid lg:grid-cols-2 lg:gap-24">
           <div className="space-y-10 md:space-y-12 lg:space-y-16">
             <Heading className="font-extrabold tracking-tight lg:text-6xl">
               {locales.heroTitle}
