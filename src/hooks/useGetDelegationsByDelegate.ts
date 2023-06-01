@@ -4,11 +4,19 @@ import { DelegateCash } from "delegatecash";
 import { ethers } from "ethers";
 import { useQuery } from "@tanstack/react-query";
 
+export interface Delegation {
+  type: "NONE" | "ALL" | "CONTRACT" | "TOKEN";
+  vault: string;
+  delegate: string;
+  contract: string;
+  tokenId: number;
+}
+
 export const useGetDelegationsByDelegate = (
   address: string | undefined,
   enable: boolean
 ) => {
-  const { data, isLoading, error } = useQuery(
+  const { data, isLoading, error } = useQuery<Delegation[]>(
     keyStore.delegations.byDelegate(address as string).queryKey,
     () => {
       const provider = new ethers.providers.JsonRpcProvider(
@@ -22,9 +30,9 @@ export const useGetDelegationsByDelegate = (
   );
 
   let addresses = data ? data?.map((d) => d.vault) : undefined;
-
   return {
     addresses,
+    data,
     isLoading,
     error,
   };
