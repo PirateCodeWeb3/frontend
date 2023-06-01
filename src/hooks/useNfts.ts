@@ -4,7 +4,9 @@ import { keyStore } from "@/config/keystore";
 import { useQuery } from "@tanstack/react-query";
 
 export const useNfts = (address: string | undefined) => {
-  const { data, isLoading, error, refetch } = useQuery<OwnedNft[]>(
+  const { data, isLoading, error, refetch } = useQuery<
+    Record<string, OwnedNft[]>
+  >(
     keyStore.nfts.byAddress(address as string).queryKey,
     () =>
       fetch(`/api/nfts/${address}`, {
@@ -16,11 +18,9 @@ export const useNfts = (address: string | undefined) => {
   );
 
   return {
-    nfts: data ?? [],
-    total: data?.length ?? 0,
+    nfts: data ? data[address as string] ?? [] : [],
     isLoading,
     error,
-    collections: [...new Set(data?.map((nft) => nft.title))],
     refetch,
   };
 };
@@ -30,7 +30,9 @@ export const useNftsFromAddresses = (addresses: string[] | undefined) => {
     addresses && addresses?.length > 0
       ? addresses?.join("/")
       : "0x0000000000000000000000000000000000000000";
-  const { data, isLoading, error, refetch } = useQuery<OwnedNft[]>(
+  const { data, isLoading, error, refetch } = useQuery<
+    Record<string, OwnedNft[]>
+  >(
     keyStore.nfts.byAddresses(addresses as string[]).queryKey,
     () =>
       fetch(`/api/nfts/${addressesPath}`, {
@@ -42,11 +44,10 @@ export const useNftsFromAddresses = (addresses: string[] | undefined) => {
   );
 
   return {
-    nfts: data ?? [],
-    total: data?.length ?? 0,
+    nfts: data ? Object.keys(data).flatMap((k) => data[k]) : [],
+    data: data ? data : {},
     isLoading,
     error,
-    collections: [...new Set(data?.map((nft) => nft.title))],
     refetch,
   };
 };

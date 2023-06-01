@@ -19,19 +19,25 @@ export default async function handler(
   }
 
   const { addresses } = req.query;
-
-  let data: OwnedNft[] = [];
-
-  data = await Promise.all(
+  const results = await Promise.all(
     ((addresses as string[] | undefined) ?? [])
       .filter(
-        (address) => address != "0x0000000000000000000000000000000000000000"
+        (address) => address !== "0x0000000000000000000000000000000000000000"
       )
-      .map((address) => fetchAllNfts(address))
-  ).then((results) => results.flat());
+      .map(async (address) => {
+        const nfts = await fetchAllNfts(address);
+        return { address, nfts };
+      })
+  );
 
-  const withoutERC1155 = data.filter((nft) => nft.tokenType !== "ERC1155");
-  return res.status(200).json(withoutERC1155);
+  const addressObject: Record<string, OwnedNft[]> = results.reduce<
+    Record<string, OwnedNft[]>
+  >((obj, { address, nfts }) => {
+    obj[address] = nfts.filter((nft) => nft.tokenType !== "ERC1155");
+    return obj;
+  }, {});
+
+  return res.status(200).json(addressObject);
 }
 
 const fetchAllNfts = async (

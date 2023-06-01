@@ -1,19 +1,52 @@
+import {
+  Delegation,
+  useGetDelegationsByDelegate,
+} from "./useGetDelegationsByDelegate";
 import { useNfts, useNftsFromAddresses } from "./useNfts";
 
 import { OwnedNft } from "alchemy-sdk";
 import { SET_PRIMARY_METHOD } from "./useSetPrimary";
 import { useGetColdWalletsWarmXYZ } from "./useGetColdWalletsWarmXYZ";
-import { useGetDelegationsByDelegate } from "./useGetDelegationsByDelegate";
 
 const getNftsFromMethod = (
   method: SET_PRIMARY_METHOD,
   nfts: OwnedNft[],
-  nftsDC: OwnedNft[],
-  nftsWarm: OwnedNft[]
+  nftsDC: Record<string, OwnedNft[]>,
+  nftsWarm: OwnedNft[],
+  delegations: Delegation[] = []
 ) => {
   switch (method) {
     case SET_PRIMARY_METHOD.DELEGATECASH:
-      return nftsDC;
+      let filteredNfts: OwnedNft[] = [];
+
+      delegations.forEach((d) => {
+        const vaultNfts = nftsDC[d.vault] ?? [];
+        if (d.type === "ALL") {
+          filteredNfts = filteredNfts.concat(vaultNfts);
+        }
+        if (d.type === "CONTRACT") {
+          filteredNfts = filteredNfts.concat(
+            vaultNfts.filter((nft) => {
+              return (
+                nft.contract.address.toLocaleLowerCase() ===
+                d.contract.toLowerCase()
+              );
+            })
+          );
+        }
+        if (d.type === "TOKEN") {
+          filteredNfts = filteredNfts.concat(
+            vaultNfts.filter(
+              (nft) =>
+                nft.contract.address.toLocaleLowerCase() ===
+                  d.contract.toLowerCase() &&
+                nft.tokenId === d.tokenId.toString()
+            )
+          );
+        }
+      });
+
+      return filteredNfts;
 
     case SET_PRIMARY_METHOD.WARMXYZ:
       return nftsWarm;
@@ -31,6 +64,7 @@ export const useNftsToSetPrimary = (
     isLoading: isLoadingDC,
     error: errorDC,
     addresses: dcVaults,
+    data: delegations,
   } = useGetDelegationsByDelegate(
     address,
     method === SET_PRIMARY_METHOD.DELEGATECASH
@@ -50,7 +84,7 @@ export const useNftsToSetPrimary = (
   } = useNfts(wallet);
 
   const {
-    nfts: nftsDC,
+    data: nftsDC,
     isLoading: isLoadingNftsDC,
     error: errorNftsDC,
   } = useNftsFromAddresses(dcVaults);
@@ -70,6 +104,6 @@ export const useNftsToSetPrimary = (
   return {
     isLoading,
     error,
-    nfts: getNftsFromMethod(method, nfts, nftsDC, nftsWarm),
+    nfts: getNftsFromMethod(method, nfts, nftsDC, nftsWarm, delegations),
   };
 };
