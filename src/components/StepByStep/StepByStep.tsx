@@ -104,9 +104,6 @@ export const StepByStep = withHydratationFix((): React.ReactElement | null => {
                 <SelectItem value={SET_PRIMARY_METHOD.DELEGATECASH}>
                   {locales.delegateCash}
                 </SelectItem>
-                <SelectItem value={SET_PRIMARY_METHOD.WARMXYZ}>
-                  {locales.warmXYZ}
-                </SelectItem>
               </SelectContent>
             </Select>
           </div>

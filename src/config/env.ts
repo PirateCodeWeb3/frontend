@@ -6,8 +6,6 @@ const GOERLI_PRIMARY_PFP_CONTRACT =
 const GOERLI_PRIMARY_VERIFICATION_CONTRACT =
   "0x036F0d017f5D11080Dc426De30A455687C9bEf3a";
 
-const GOERLI_WARMXYZ_CONTRACT = "0x8E1520599567DF281dB37b9adE4C77D5a561eFD4";
-
 const PROVIDER_URL = "https://eth-goerli.alchemyapi.io/v2";
 const ALCHEMY_API_KEY =
   process.env.NEXT_PUBLIC_ALCHEMY_ID ?? process.env.ALCHEMY_ID ?? "";
@@ -28,8 +26,6 @@ export const env = {
   PROVIDER_URL: `${
     process.env.NEXT_PUBLIC_PROVIDER_URL ?? PROVIDER_URL
   }/${ALCHEMY_API_KEY}`,
-  WARMXYZ_CONTRACT: (process.env.NEXT_PUBLIC_WARMXYZ_CONTRACT ??
-    GOERLI_WARMXYZ_CONTRACT) as `0x${string}`,
 };
 
 export const TWITTER_RECORD = "com.twitter";

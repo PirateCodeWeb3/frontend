@@ -1,8 +1,7 @@
 [
   {
     "inputs": [
-      { "internalType": "address", "name": "dciAddress", "type": "address" },
-      { "internalType": "address", "name": "wxiAddress", "type": "address" }
+      { "internalType": "address", "name": "dciAddress", "type": "address" }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
@@ -84,6 +83,31 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "contract_",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "PrimarySetByDelegateCash",
+    "type": "event"
+  },
+  {
     "inputs": [],
     "name": "getCollections",
     "outputs": [
@@ -99,6 +123,25 @@
     "name": "getCommunities",
     "outputs": [
       { "internalType": "address[]", "name": "", "type": "address[]" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address[]", "name": "addrs", "type": "address[]" }
+    ],
+    "name": "getPrimaries",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "contract_", "type": "address" },
+          { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+        ],
+        "internalType": "struct IPrimaryPFP.PFP[]",
+        "name": "",
+        "type": "tuple[]"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -151,16 +194,6 @@
       { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
     ],
     "name": "setPrimaryByDelegateCash",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "contract_", "type": "address" },
-      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
-    ],
-    "name": "setPrimaryByWarmXyz",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
