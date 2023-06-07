@@ -6,9 +6,6 @@ import { PickerList } from "./PickerList";
 import { SET_PRIMARY_METHOD } from "@/hooks/useSetPrimary";
 import { SetPrimaryPFPButton } from "./SetPrimaryPFPBtn";
 import { locales } from "@/locales";
-import { useGetColdWalletsWarmXYZ } from "@/hooks/useGetColdWalletsWarmXYZ";
-import { useGetDelegationsByDelegate } from "@/hooks/useGetDelegationsByDelegate";
-import { useNfts } from "@/hooks/useNfts";
 import { useNftsToSetPrimary } from "@/hooks/useNftsToSetPrimary";
 import { useUser } from "@/hooks/useUser";
 

@@ -12,18 +12,13 @@ import { useGetPrimary } from "./useGetPrimary";
 export const enum SET_PRIMARY_METHOD {
   NORMAL = "NORMAL",
   DELEGATECASH = "DELEGATECASH",
-  WARMXYZ = "WARMXYZ",
 }
 
 function getSetPrimaryFunctionFromMethod(method: SET_PRIMARY_METHOD) {
-  switch (method) {
-    case SET_PRIMARY_METHOD.DELEGATECASH:
-      return "setPrimaryByDelegateCash";
-    case SET_PRIMARY_METHOD.WARMXYZ:
-      return "setPrimaryByWarmXyz";
-    default:
-      return "setPrimary";
+  if (method === SET_PRIMARY_METHOD.DELEGATECASH) {
+    return "setPrimaryByDelegateCash";
   }
+  return "setPrimary";
 }
 
 export const useSetPrimary = (

@@ -71,5 +71,4 @@ export const locales = {
   methodPlaceHolder: "Select the method to set primary pfp",
   noDelegation: "With my current wallet",
   delegateCash: "With Delegate.cash",
-  warmXYZ: "With Warm.xyz",
 };
