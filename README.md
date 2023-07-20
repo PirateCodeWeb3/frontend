@@ -31,8 +31,8 @@ NEXT_PUBLIC_PROVIDER_URL=
 - `NEXT_PUBLIC_NETWORK` : Selected Network use in api part of next.js. Allowed values Goerli, Ethereum
 - `NETWORK` : Selected Network use in api part of next.js. Allowed values Goerli, Ethereum
 - `NEXT_PUBLIC_TX_EXPLORER` : Blockchain explorer to see transactions ie: https://goerli.etherscan.io/tx
-- `NEXT_PUBLIC_PRIMARY_PFP_CONTRACT` : Contract use in frontend part of next.js
-- `PRIMARY_PFP_CONTRACT` : Contract use in api part of next.js
+- `NEXT_PUBLIC_PRIMARY_PFP_CONTRACT` : Contract use in frontend part of next.js 0x00000000009706556bfd041ed3ea54aa406a7e60
+- `PRIMARY_PFP_CONTRACT` : Contract use in api part of next.js 0x00000000009706556bfd041ed3ea54aa406a7e60
 - `TX_EXPLORER` : Blockchain explorer (https://goerli.etherscan.io/tx, https://etherscan.io/tx)
 - `NEXT_PUBLIC_PROVIDER_URL` : JSON RPC Provider (https://eth-goerli.alchemyapi.io/v2,https://eth-mainnet.alchemyapi.io/v2/API_KEY )
 
