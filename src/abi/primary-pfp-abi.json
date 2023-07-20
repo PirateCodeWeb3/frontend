@@ -1,35 +1,15 @@
 [
   {
-    "inputs": [
-      { "internalType": "address", "name": "dciAddress", "type": "address" }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
     "anonymous": false,
     "inputs": [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "contract_",
-        "type": "address"
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "version",
+        "type": "uint8"
       }
     ],
-    "name": "CollectionAdded",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "contract_",
-        "type": "address"
-      }
-    ],
-    "name": "CollectionRemoved",
+    "name": "Initialized",
     "type": "event"
   },
   {
@@ -108,35 +88,27 @@
     "type": "event"
   },
   {
-    "inputs": [],
-    "name": "getCollections",
-    "outputs": [
-      { "internalType": "address[]", "name": "", "type": "address[]" }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
-      { "internalType": "address", "name": "contract_", "type": "address" }
-    ],
-    "name": "getCommunities",
-    "outputs": [
-      { "internalType": "address[]", "name": "", "type": "address[]" }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address[]", "name": "addrs", "type": "address[]" }
+      {
+        "internalType": "address[]",
+        "name": "addrs",
+        "type": "address[]"
+      }
     ],
     "name": "getPrimaries",
     "outputs": [
       {
         "components": [
-          { "internalType": "address", "name": "contract_", "type": "address" },
-          { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+          {
+            "internalType": "address",
+            "name": "contract_",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tokenId",
+            "type": "uint256"
+          }
         ],
         "internalType": "struct IPrimaryPFP.PFP[]",
         "name": "",
@@ -148,30 +120,77 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "addr", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "addr",
+        "type": "address"
+      }
     ],
     "name": "getPrimary",
     "outputs": [
-      { "internalType": "address", "name": "", "type": "address" },
-      { "internalType": "uint256", "name": "", "type": "uint256" }
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "contract_", "type": "address" },
-      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+      {
+        "internalType": "address",
+        "name": "contract_",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
     ],
     "name": "getPrimaryAddress",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "contract_", "type": "address" },
-      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+      {
+        "internalType": "address",
+        "name": "dciAddress",
+        "type": "address"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "contract_",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
     ],
     "name": "removePrimary",
     "outputs": [],
@@ -180,8 +199,16 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "contract_", "type": "address" },
-      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+      {
+        "internalType": "address",
+        "name": "contract_",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
     ],
     "name": "setPrimary",
     "outputs": [],
@@ -190,8 +217,16 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "contract_", "type": "address" },
-      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+      {
+        "internalType": "address",
+        "name": "contract_",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
     ],
     "name": "setPrimaryByDelegateCash",
     "outputs": [],
@@ -200,10 +235,20 @@
   },
   {
     "inputs": [
-      { "internalType": "bytes4", "name": "interfaceId", "type": "bytes4" }
+      {
+        "internalType": "bytes4",
+        "name": "interfaceId",
+        "type": "bytes4"
+      }
     ],
     "name": "supportsInterface",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   }
